@@ -1,0 +1,111 @@
+<script src="./product_data.js"></script>
+
+<!DOCTYPE html>
+<html>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+<style>
+body, html {
+  height: 100%;
+  font-family: "Inconsolata", sans-serif;
+}
+
+mark { 
+  background-color: black;
+  color: white;
+}
+
+.bgimg {
+  background-position: center;
+  background-size: cover;
+  background-image: url("images/BG.png");
+  min-height: 75%;
+}
+
+.menu {
+  display: none;
+}
+
+main {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    background-image: url(images/phone_globe.jpg);
+    background-repeat: no-repeat;
+}
+
+.img{
+  width: 200px
+
+}
+</style>
+<body>
+
+<!-- Navigation Bar at Top -->
+<div class="w3-top">
+    <div class="w3-row w3-padding w3-black">
+      <div class="w3-col s3">
+        <a href="#" class="w3-button w3-block w3-black">HOME</a>
+      </div>
+      <div class="w3-col s3">
+        <a href="#about" class="w3-button w3-block w3-black">ABOUT</a>
+      </div>
+      <div class="w3-col s3">
+        <a href="#productdisplay" class="w3-button w3-block w3w-black">OUR AXOLOTLS</a>
+      </div>
+      <div class="w3-col s3">
+        <a href="#invoice" class="w3-button w3-block w3-black">CHECKOUT</a>
+      </div>
+    </div>
+  </div>
+
+<!-- Header with image -->
+<header class="bgimg w3-display-container w3-grayscale-min" id="home">
+  <div class="w3-display-bottomleft w3-center w3-padding-large w3-hide-small">
+    <span class="w3-tag">Honolulu, Hawaii</span>
+  </div>
+  <div class="w3-display-middle w3-center">
+    <h5 class="w3-center w3-padding-64" style= "font-size: 80px"><span class="w3-tag w3-wide">THE AXOLOTL STORE</span></h5>
+  </div>
+</header>
+
+<!-- Background Color to whole page-->
+<div class="w3-sand w3-grayscale w3-large">
+
+    <!-- About Section-->
+    <div class="w3-container" id="about">
+      <div class="w3-content" style="max-width:700px">
+        <h5 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">ABOUT OUR STORE</span></h5>
+        <p>We sell axolotls that are locally bred in Hawaii. We have axolotls of all different colors. We can ship axolotls to any island.</p>
+        <p>If you are interested in purchasing an axolotl please be sure to refer to <a href= https://www.thesprucepets.com/axolotls-as-pets-1236714>this site</a> to ensure that you are ready to take care of your new friend. </p>
+        <div class="w3-panel w3-leftbar w3-light-grey">
+          <p><i>"There is nothing greater than watching your axolotl sit in one place all day! (With the occasional chaotic swimming!)"</i></p>
+          <p>Axolotl Breeder and Shop Owner: Chayse Tamaki</p>
+        </div>
+        <p>If you think you are ready to purchase one of our axolotls, continue to scroll down to the next section or click "Our Axolotls" in the navigation bar above.</p>
+      </div>
+    </div>
+
+<!-- Products Display -->
+<div class="w3-container" id="menu">
+  <div class="w3-content" style="max-width:700px">
+ 
+    <h5 class="w3-center w3-padding-30"><span class="w3-tag w3-wide">OUR AXOLOTLS</span></h5> 
+  </div>
+  <div><main>
+    <script>
+        for (i=1; i <= products.length; i++) {
+        document.write(`
+        <section style= "margin: 20px"; >
+            <img src=${products[i].image} width=600px>
+            <h2 style= "line-height: 20px">${products[i].color} <span style= "float: right"> $ ${products[i].price}</span></h2>
+            <h5 class="w3-padding-15" style= "font-size: 15px"><span class="w3-tag w3-wide">${products[i].rarity}</span></h5>
+        </section>`)
+    }
+    </script>
+    </div></main>
+</div>
+</body>
