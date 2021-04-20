@@ -160,9 +160,8 @@ app.post("/login.html", function (request, response) {
          }
       });
 
-      app.get("./public/registration.html", function (request, response) {
+      app.get("/registration.html", function (request, response) {
          // process registration form
-      
          str = `
          <!DOCTYPE html>
 <html>
