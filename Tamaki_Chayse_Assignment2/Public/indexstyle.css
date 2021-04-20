@@ -1,0 +1,48 @@
+
+/*Styles body/html elements*/
+body, html {
+    height: 100%;
+    font-family: "Inconsolata", sans-serif;
+  }
+
+/*Styles mark elements*/
+mark { 
+    background-color: black;
+    color: white;
+  }
+  
+/*Styles .bgimg elements*/
+.bgimg {
+    background-position: center;
+    background-size: cover;
+    background-image: url("images/BG.png");
+    min-height: 75%;
+  }
+
+  .bgimg2 {
+    background-position: center;
+    background-size: cover;
+    background-image: url("images/Login.jpg");
+    min-height: 75%;
+  }
+
+  .bgimg3 {
+    background-position: center;
+    background-size: cover;
+    background-image: url("images/Registration.png");
+    min-height: 75%;
+  }
+ 
+/*Styles .menu elements*/
+.menu {
+    display: none;
+  }
+ 
+/*Styles main elements*/
+main {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-around;
+      background-repeat: no-repeat;
+  }
+
