@@ -1,7 +1,7 @@
 const querystring = require('querystring');
 var express = require('express'); // express helps to handle multiple http requests, code for server
 var myParser = require("body-parser"); //code for server
-var products = require("./public/products_data.js"); // require data from javascript file
+var products = require("./public/product_data.js"); // require data from javascript file
 var filename = 'user_data.json';
 var app = express();
 var qs = require('querystring');

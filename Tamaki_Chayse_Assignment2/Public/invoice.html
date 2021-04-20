@@ -1,9 +1,14 @@
 <!--Links product_data.js so product array can be used-->
-<script src="./product_data.json"></script>
+<script src="./product_data.js"></script>
 
 <script>
   //This code is from the Assignment 1 example invoice created by Daniel Port and edited to fit my own html code
   let params = (new URL(document.location)).searchParams;
+
+  if(params.has('username')) {
+    alert(`Thank you for shopping with us ${params.get('username')}!`);
+  }
+
   var quantities = [];
   // form was okay to submit so process the invoice
   if (params.has('checkout_submit')) {
