@@ -115,7 +115,7 @@ app.get("/login.html", function (request, response) {
      <body>
        <div style="text-align: center;height:400px" class="w3-sand w3-grayscale w3-large";>
    
-           <form name="loginform" method="POST">
+           <form name="loginform" action="?${qs.stringify(request.query)}" method="POST">
                <div>
                    <input type="text" name="username" size="40" placeholder="username" style="margin-bottom: 2%;margin-top: 5%;"><br />
                    <input type="password" name="password" size="40" placeholder="password" style="margin-bottom: 2%;"><br/>
@@ -129,7 +129,7 @@ app.get("/login.html", function (request, response) {
        <h3>Click below to create an account</h3>
        <body>
        <div>
-           <form action="./registration.html">
+           <form action="./registration.html?${qs.stringify(request.query)}">
            <input type="submit" class="button" value="Create Account" id="regpage" name="register_here" style="margin-bottom: 5%;">
            </form>
        </div>
@@ -151,7 +151,7 @@ app.post("/login.html", function (request, response) {
             if (users_reg_data[the_username].password == request.body.password) {
                // make the query string of product quantity needed for the invoice
                theQuantQuerystring = qs.stringify(axolotl_quantity);
-               response.redirect('/invoice.html?' + theQuantQuerystring + `&username=${the_username}`);
+               response.redirect('/invoice.html?' + qs.stringify(request.query) + `&username=${the_username}`);
              
             } else {
                response.redirect('./login.html?');
@@ -218,7 +218,7 @@ app.post("/login.html", function (request, response) {
 
       <!--textboxes for registration input. pattern specifies what characters are necessary for given textboxes.-->
       <div class="card">
-        <form method="POST" action="" onsubmit=validatePassword()>
+        <form method="POST" action="?${qs.stringify(request.query)}" onsubmit=validatePassword()>
           <input type="text" name="fullname" size="40" pattern="[a-zA-Z]+[ ]+[a-zA-Z]+" maxlength="30"
             placeholder="First & Last Name" style="margin-bottom: 2%;margin-top: 5%;"><br />
           <input type="text" name="username" size="40" pattern=".[a-z0-9]{3,10}" required
@@ -270,7 +270,7 @@ app.post("/login.html", function (request, response) {
                
                      theQuantQuerystring = qs.stringify(axolotl_quantity);
                      fs.writeFileSync(filename, JSON.stringify(users_reg_data));
-                     response.redirect("/invoice.html?" + theQuantQuerystring + `&username=${the_username}`);
+                     response.redirect("/invoice.html?" + qs.stringify(request.query) + `&username=${the_username}`);
                      
                
                   }
