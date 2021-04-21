@@ -129,7 +129,7 @@ app.get("/login.html", function (request, response) {
        <h3>Click below to create an account</h3>
        <body>
        <div>
-           <form action="./registration.html?${qs.stringify(request.query)}">
+           <form action="./registration.html?">
            <input type="submit" class="button" value="Create Account" id="regpage" name="register_here" style="margin-bottom: 5%;">
            </form>
        </div>
@@ -154,7 +154,7 @@ app.post("/login.html", function (request, response) {
                response.redirect('/invoice.html?' + qs.stringify(request.query) + `&username=${the_username}`);
              
             } else {
-               response.redirect('./login.html?');
+               response.redirect('./login.html?' + qs.stringify(request.query));
                
             }
          }
@@ -176,7 +176,6 @@ app.post("/login.html", function (request, response) {
 <link rel="stylesheet" href="./indexstyle.css">
 <script>src = "server.js"</script>
 </head>
-
 <body>
   <!-- Navigation Bar at Top -->
   <div class="w3-top">
@@ -212,13 +211,11 @@ app.post("/login.html", function (request, response) {
       </h5>
     </div>
   </header>
-
   <body>
     <div style="text-align: center;height:500px" class="w3-sand w3-grayscale w3-large">
-
       <!--textboxes for registration input. pattern specifies what characters are necessary for given textboxes.-->
       <div class="card">
-        <form method="POST" action="?${qs.stringify(request.query)}" onsubmit=validatePassword()>
+        <form method="POST" action="" onsubmit=validatePassword()>
           <input type="text" name="fullname" size="40" pattern="[a-zA-Z]+[ ]+[a-zA-Z]+" maxlength="30"
             placeholder="First & Last Name" style="margin-bottom: 2%;margin-top: 5%;"><br />
           <input type="text" name="username" size="40" pattern=".[a-z0-9]{3,10}" required
@@ -229,14 +226,12 @@ app.post("/login.html", function (request, response) {
             title="8 Characters Minimum" placeholder="Password" style="margin-bottom: 2%;"><br />
           <input type="password" id="repeat_password" name="repeat_password" size="40" pattern=".{8,}" required
             title="8 Characters Minimum" placeholder="Repeat Password" style="margin-bottom: 2%;"><br />
-
           <input type="submit" value="Register" id="submit">
           <h5 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">"You axolotl journey starts here!"</span></h5>
         </form>
       </div>
     </div>
   </body>
-
 </html>
          `;
          response.send(str);
