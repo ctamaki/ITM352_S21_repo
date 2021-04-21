@@ -133,7 +133,6 @@ app.get("/login.html", function (request, response) {
            <input type="submit" class="button" value="Create Account" id="regpage" name="register_here" style="margin-bottom: 5%;">
            </form>
        </div>
-       
        </body>
        </html>
 `;
