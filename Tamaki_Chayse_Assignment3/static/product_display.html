@@ -1,0 +1,203 @@
+<script>
+    /* When the user clicks on the button, 
+  toggle between hiding and showing the dropdown content */
+  function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
+  
+  // Close the dropdown if the user clicks outside of it
+  window.onclick = function(e) {
+    if (!e.target.matches('.dropbtn')) {
+    var myDropdown = document.getElementById("myDropdown");
+      if (myDropdown.classList.contains('show')) {
+        myDropdown.classList.remove('show');
+      }
+    }
+  }
+</script>
+<script src="product_data.js" type="text/javascript"></script>
+<script>
+  var products_array = "product_data.js"
+</script>\
+<script>
+  let params = (new URL(document.location)).searchParams;
+  var product_type = params.get("typekey");
+
+  window.onload = function () {
+      if (typeof cart_data[product_type] != "undefined") {
+          for (i in cart_data[product_type]) {
+              document.getElementById(`quantity${i}`).value = cart_data[product_type][i];
+          }
+      }
+  };
+
+  function checkQuantityTextbox(theTextbox) {
+      var errs = isNonNegInt(theTextbox.value, true); //Checks the values using the isNonNegInt function
+      if (errs.length == 0) errs = ['']; //If the inputs don't return any errors then there is no need for a textbox message
+      if (theTextbox.value.trim() == '') errs = ['']; //If the respondent left the textbox blank then there is no need for a textbox message
+      document.getElementById(theTextbox.name + '_message').innerHTML = errs.join(", "); //joins all errors that did occur and assigns them to the textbox message
+  }
+
+  function isNonNegInt(q, return_errors = false) {
+    errors = []; // assume there are no errors from the start
+    if (q == '') q = 0; // Checks for blank inputs and assigns 0
+    if (Number(q) != q) errors.push('<font color="red">Please use numbers only!</font>'); // Checks for inputs that are not numbers and returns an error message
+    else if (parseInt(q) != q) errors.push('<font color="red">Please use a whole number!</font>'); // Checks for whole numbers and returns an error message
+    if (q < 0) errors.push('<font color="red">Please use a positive integer!</font>'); // Checks for negative inputs and returns an error message
+    return return_errors ? errors : (errors.length == 0); //Returns false for return_errors if no errors found
+  }
+
+  function getCookie(name = '') {
+      let cookies = document.cookie;
+      let cookiestore = {};
+
+      cookies = cookies.split(";");
+
+      if (cookies[0] == "" & cookies[0][0] == undefined){
+          return undefined;
+      }
+      cookies.forEach(function(cookie) {
+          cookie = cookie.split(/=(.+)/);
+          if (cookie[0].substr(0,1) == ' ') {
+              cookie[0] = cookie[0].substr(1)
+          }
+          cookiestore[cookie[0]] = cookie[1];
+          });
+      return (name !=='' ? cookiestore[name] : cookiestore);
+  }
+
+  function savetocart (index) {
+      var productdata = {};
+      productdata.product_type = product_type;
+      productdata.product_index = index;
+      productdata.quantity = document.getElementById('quantity' + index).value;
+      if (typeof cart_data[product_type] == "undefined") {
+        cart_data[product_type] =[];
+      }
+      if (typeof cart_data[product_type][index] == "undefined"){
+          cart_data[product_type][index] = 0;
+      }
+      document.getElementById('quantity' + index).value = parseInt(document.getElementById('quantity' +index).value ) + cart_data[product_type][index];
+      console.log(productdata)
+      fetch ('addtocart', {
+          method: 'POST',
+          body: new URLSearchParams(
+              productdata
+          )
+      })
+      .then(res => res.text())
+      .then((res) => {
+          alert(res);
+      })
+      .catch(err => console.log(err))
+  }
+
+  function loadJSON(service,callback) {
+      var xobj = new XMLHttpRequest();
+      xobj.overrideMimeType("application/json");
+      xobj.open('POST', service, false);
+      xobj.onreadystatechange = function () {
+          if (xobj.readyState == 4 && xobj.status == "200") {
+              callback(xobj.responseText);
+          }
+      };
+      xobj.send(null);
+  }
+  var cart_data = {};
+  loadJSON('loadcart', function (res) {
+  cart_data = JSON.parse(res);
+  });
+  console.log(cart_data);
+
+  var cookieToEdit = getCookie('username');
+  var x = cookieToEdit.replace('username=', '');
+  var display = x.replace('%20', ' ');
+
+</script>
+
+<!DOCTYPE html>
+<html>
+<title>Chayse's Axolotl Store</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--Links to stylesheets from w3schools template-->
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+<!--Links to stylesheet similar to SmartPhoneProducts-->
+<link rel="stylesheet" href="./indexstyle.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<body>
+  <!--Creates NavBar with Dropdown-->
+  <div class="w3-top">
+    <div class="w3-row w3-padding w3-black">
+    <a class="notdropdown" style="width:24.9999%; text-align:center;text-decoration:none;" href="./index.html">HOME</a>
+    <div class="dropdown" style="width:24.9999%">
+      <button class="dropbtn" style="width:100%" onclick="myFunction()">PRODUCTS
+      </button>
+        <div class="dropdown-content" id="myDropdown">
+          <script>
+            for (let ptype in products) {
+              document.write(`<a href="./product_display.html?typekey=${ptype}">${ptype}</a>`)
+            }
+          </script>
+        </div>
+    </div> 
+    <form name = "productselection" action="process_form" method="POST">
+    <script>
+      if (getCookie('username') == undefined) {
+        document.write(`<a class="notdropdown" style="width:24.9999%; text-align:center;text-decoration:none;" href="login.html">CART</a>`);
+      }
+      else {
+        document.write(`<a class="notdropdown" style="width:24.9999%; text-align:center;text-decoration:none;" href="/cart.html">CART</a>`);
+      }
+    </script>
+    <script>
+      if (getCookie('username') == undefined) {
+        document.write(`<a class="notdropdown" style="width:24.9999%; text-align:center;text-decoration:none;" href="login.html">LOGIN/SIGNUP</a>`);
+      } else {
+        document.write(`<a class="notdropdown" style="width:24.9999%; text-align:center;text-decoration:none;" href="logout">${getCookie('username')} (LOGOUT)</a>`);
+      }
+    </script>
+    </div>
+  </div>
+
+  <!-- Header with image -->
+  <!--Assigns this section to HOME-->
+  <header class="bgimg w3-display-container w3-grayscale-min" id="home">
+    <!--Displays where the store is located on the bottom left of Header-->
+    <div class="w3-display-bottomleft w3-center w3-padding-large w3-hide-small">
+      <span class="w3-tag">Honolulu, Hawaii</span>
+    </div>
+    <!--Diplays a title on the page-->
+    <div class="w3-display-middle w3-center">
+      <script>
+        document.write(`<h5 class="w3-center w3-padding-64" style="font-size: 80px"><span class="w3-tag w3-wide">${product_type} AXOLOTLS</span>
+        </h5>`)
+
+      </script>
+    </div>
+  </header>
+  <br><br><br>
+            <div>
+              <main>
+                <script>
+                  //Sets up products diplay and references array from product_data.js
+                  for (i = 0; i < products[product_type].length; i++) {
+                    document.write(`
+                    <section style= "margin: 20px"; >
+                        <img src = ${products[product_type][i].image} width = 600px>
+                        <h2 id=name${i} style= "line-height: 20px">${products[product_type][i].color} <span style= "float: right">$${products[product_type][i].price}</span></h2>
+                        <h5 class="w3-padding-15" style= "font-size: 15px"><span class="w3-tag w3-wide">${products[product_type][i].rarity}</span></h5>
+                        <label>Quantity:</label>
+                        <input type="text" placeholder="0" id="quantity${i}" onkeyup="checkQuantityTextbox(this)">
+                        <span id="quantity${i}_message">Enter a quantity<span>
+                        <input type = "button" name="add to cart" value = "ADD TO CART" onclick="savetocart(${i});">
+                    </section>
+                    `);
+                  }
+                </script>
+            </div>
+          </form>
+  </body>
+  </html>
+  

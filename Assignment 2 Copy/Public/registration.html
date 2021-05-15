@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Registration</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--Links to stylesheets from w3schools template-->
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+<!--Links to stylesheet similar to SmartPhoneProducts-->
+<link rel="stylesheet" href="./indexstyle.css">
+<script>src = "server.js"</script>
+</head>
+<script>
+  var password = document.getElementById("password"); //turns password into an object
+  var repeat_password = document.getElementById("repeat_password"); //turns repeat password into an object
+
+  function validatePassword() {
+    if (password.value != repeat_password.value) { //if password is not equal to repeat password, say passwords don't match
+      alert("Passwords do not match.");
+      response.redirect('public/registration.html')
+    }
+    else {
+      response.redirect('Login_Successful')
+    }
+
+  }
+  validatePassword();
+</script>
+
+<body>
+  <!-- Navigation Bar at Top -->
+  <div class="w3-top">
+    <div class="w3-row w3-padding w3-black">
+      <!--Creates HOME element on navigation bar and links it to proper section-->
+      <div class="w3-col s3">
+        <a href="./index.html" class="w3-button w3-block w3-black">HOME</a>
+      </div>
+      <!--Creates ABOUT element on navigation bar and links it to proper section-->
+      <div class="w3-col s3">
+        <a href="./index.html#about" class="w3-button w3-block w3-black">ABOUT</a>
+      </div>
+      <!--Creates OUR AXOLOTLS element on navigation bar and links it to proper section-->
+      <div class="w3-col s3">
+        <a href="./index.html#productdisplay" class="w3-button w3-block w3w-black">OUR AXOLOTLS</a>
+      </div>
+      <!--Creates CHECKOUT element on navigation bar and links it to proper section-->
+      <div class="w3-col s3">
+        <a href="./index.html#checkout" class="w3-button w3-block w3-black">CHECKOUT</a>
+      </div>
+    </div>
+  </div>
+  <!-- Header with image -->
+  <!--Assigns this section to HOME-->
+  <header class="bgimg3 w3-display-container w3-grayscale-min" id="home">
+    <div class="w3-display-bottomleft w3-center w3-padding-large w3-hide-small">
+      <span class="w3-tag"><span style="color:rgb(255, 101, 101)">Attention!:</span> Using the navigation bar (above)
+        from this page will restart your order</span>
+    </div>
+    <!--Diplays a title on the page-->
+    <div class="w3-display-middle w3-center">
+      <h5 class="w3-center w3-padding-64" style="font-size: 80px"><span class="w3-tag w3-wide">REGISTRATION BELOW</span>
+      </h5>
+    </div>
+  </header>
+
+  <body>
+    <div style="text-align: center;height:500px" class="w3-sand w3-grayscale w3-large">
+
+      <!--textboxes for registration input. pattern specifies what characters are necessary for given textboxes.-->
+      <div class="card">
+        <form method="POST" action="" onsubmit=validatePassword()>
+          <input type="text" name="fullname" size="40" pattern="[a-zA-Z]+[ ]+[a-zA-Z]+" maxlength="30"
+            placeholder="First & Last Name" style="margin-bottom: 2%;margin-top: 5%;"><br />
+          <input type="text" name="username" size="40" pattern=".[a-z0-9]{3,10}" required
+            title="Minimum 4 Characters, Maximum 10 Characters, Numbers/Letters Only" placeholder="Username" style="margin-bottom: 2%;"><br />
+          <input type="email" name="email" size="40" placeholder="Email" pattern="[a-z0-9._]+@[a-z0-9]+\.[a-z]{3,}$"
+            required title="Please enter valid email." style="margin-bottom: 2%;"><br />
+          <input type="password" id="password" name="password" size="40" pattern=".{8,}" required
+            title="8 Characters Minimum" placeholder="Password" style="margin-bottom: 2%;"><br />
+          <input type="password" id="repeat_password" name="repeat_password" size="40" pattern=".{8,}" required
+            title="8 Characters Minimum" placeholder="Repeat Password" style="margin-bottom: 2%;"><br />
+
+          <input type="submit" value="Register" id="submit">
+          <h5 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">"You axolotl journey starts here!"</span></h5>
+        </form>
+      </div>
+    </div>
+  </body>
+
+</html>

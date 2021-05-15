@@ -1,2 +1,25 @@
-order_quantity = 10
-(order_quantity > 0)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    var quantity = 20
+</script>
+<body>
+    <input id=demoInput type=number value=quantity min=0 max=50>
+    <button onclick="increment()">+</button>
+    <button onclick="decrement()">-</button>
+    <script>
+       function increment() {
+          document.getElementById('demoInput').stepUp();
+       }
+       function decrement() {
+          document.getElementById('demoInput').stepDown();
+       }
+    </script>
+</body>
+</html>

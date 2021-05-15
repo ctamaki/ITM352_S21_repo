@@ -1,0 +1,137 @@
+<script src="product_data.js" type="text/javascript"></script>
+<script>
+  var products_array = "product_data.js"
+</script>
+<script>
+  let params = (new URL(document.location)).searchParams;
+  var product_type = params.get("typekey");
+</script>
+<script>
+  /* When the user clicks on the button, 
+  toggle between hiding and showing the dropdown content */
+  function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
+  
+  // Close the dropdown if the user clicks outside of it
+  window.onclick = function(e) {
+    if (!e.target.matches('.dropbtn')) {
+    var myDropdown = document.getElementById("myDropdown");
+      if (myDropdown.classList.contains('show')) {
+        myDropdown.classList.remove('show');
+      }
+    }
+  }
+</script>
+<script>
+  var password = document.getElementById("password"); //turns password into an object
+  var repeat_password = document.getElementById("repeat_password"); //turns repeat password into an object
+
+  function validatePassword() {
+    if (password.value != repeat_password.value) { //if password is not equal to repeat password, say passwords don't match
+      alert("Passwords do not match.");
+      response.redirect('public/registration.html')
+    }
+    else {
+      response.redirect('Login_Successful')
+    }
+
+  }
+  validatePassword();
+</script>
+<!DOCTYPE html>
+<html>
+<head>
+<title>Registration</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--Links to stylesheets from w3schools template-->
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+<!--Links to stylesheet similar to SmartPhoneProducts-->
+<link rel="stylesheet" href="./indexstyle.css">
+<script>src = "server.js"</script>
+</head>
+<script>
+  var password = document.getElementById("password"); //turns password into an object
+  var repeat_password = document.getElementById("repeat_password"); //turns repeat password into an object
+
+  let params = (new URL(document.location)).searchParams;
+    // Alert the user if there is an error with the information inputted
+    window.onload = function () {
+      if (params.has('errors')) {
+        console.log("invalid");
+        alert('Fix the following errors: \n' + params.get('errors'));
+      }
+    }
+</script>
+
+<body>
+   <!--Creates NavBar with Dropdown-->
+   <div class="w3-top">
+    <div class="w3-row w3-padding w3-black">
+    <a class="notdropdown" style="width:24.9999%; text-align:center;text-decoration:none;" href="./index.html">HOME</a>
+    <div class="dropdown" style="width:24.9999%">
+      <button class="dropbtn" style="width:100%" onclick="myFunction()">PRODUCTS
+      </button>
+        <div class="dropdown-content" id="myDropdown">
+          <script>
+            for (let ptype in products) {
+              document.write(`<a href="./product_display.html?typekey=${ptype}">${ptype}</a>`)
+            }
+          </script>
+        </div>
+    </div> 
+    <a class="notdropdown" style="width:24.9999%; text-align:center;text-decoration:none;" href="./login.html">CART</a>
+    <a class="notdropdown" style="width:24.9999%; text-align:center;text-decoration:none;" href="./login.html">LOGIN/SIGNUP</a>
+    </div>
+  </div>
+  <!-- Header with image -->
+  <!--Assigns this section to HOME-->
+  <header class="bgimg3 w3-display-container w3-grayscale-min" id="home">
+    <div class="w3-display-bottomleft w3-center w3-padding-large w3-hide-small">
+      <span class="w3-tag"><span style="color:rgb(255, 101, 101)">Attention!:</span> Using the navigation bar (above)
+        from this page will restart your order</span>
+    </div>
+    <!--Diplays a title on the page-->
+    <div class="w3-display-middle w3-center">
+      <h5 class="w3-center w3-padding-64" style="font-size: 80px"><span class="w3-tag w3-wide">REGISTRATION BELOW</span>
+      </h5>
+    </div>
+  </header>
+
+  <body>
+    <div style="text-align: center;" class="w3-sand w3-grayscale w3-large">
+
+      <!--textboxes for registration input. pattern specifies what characters are necessary for given textboxes.-->
+      <div class="registration">
+        <form name="register" method="POST" action="process_register" onsubmit=validatePassword()>
+          <input type="text" name="fullname" size="40" pattern="[a-zA-Z]+[ ]+[a-zA-Z]+" maxlength="30"
+            placeholder="First & Last Name" style="margin-bottom: 2%;margin-top: 5%;"><br />
+          <input type="text" name="username" size="40" pattern=".[a-z0-9]{3,10}" required
+            title="Minimum 4 Characters, Maximum 10 Characters, Numbers/Letters Only" placeholder="Username" style="margin-bottom: 2%;"><br />
+          <input type="email" name="email" size="40" placeholder="Email" pattern="[a-z0-9._]+@[a-z0-9]+\.[a-z]{3,}$"
+            required title="Please enter valid email." style="margin-bottom: 2%;"><br />
+          <input type="password" id="password" name="password" size="40" pattern=".{8,}" required
+            title="8 Characters Minimum" placeholder="Password" style="margin-bottom: 2%;"><br />
+          <input type="password" id="repeat_password" name="repeat_password" size="40" pattern=".{8,}" required
+            title="8 Characters Minimum" placeholder="Repeat Password" style="margin-bottom: 2%;"><br />
+
+          <input type="submit" value="Register" name="register" id="submit">        
+        </form>
+        <form>
+          <div class="containerlogin">
+            <input type="button" name="Login" value="Return to Login" onclick="window.location='./login.html' + document.location.search">
+          </div>
+        </form>
+          <h5 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">"Your axolotl journey starts here!"</span></h5>
+
+      </div>
+    </div>
+    <script>
+      // Will save the products in the query string to user in the invoice page
+      register.action += document.location.search;
+  </script>
+  </body>
+
+</html>
