@@ -198,8 +198,6 @@ app.post('/process_register', function (req, res) {
         user_data[username].name = POST['fullname'];
         user_data[username].password = POST['password'];
         user_data[username].email = POST['email'];
-        user_data[username].visits = 0;
-        user_data[username].register = getMonth()/getDate()/getFullYear();
         data = JSON.stringify(user_data);
         fs.writeFileSync(filename, data, "utf-8");
         theusername = user_data['name'];
