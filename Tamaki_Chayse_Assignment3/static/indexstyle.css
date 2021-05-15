@@ -204,3 +204,8 @@ main {
   from {opacity: .4}
   to {opacity: 1}
 }
+
+/* Button Styling */
+.custombutton:hover{
+  background-color: darkgrey;
+}

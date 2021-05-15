@@ -234,13 +234,16 @@ app.post("/checkout", function (request, response) {
         if (error) {
             invoice_str += 'OH NO, SOMETHING WENT WRONG';
         } else {
-            invoice_str += 'EMAIL WAS SENT, THANK YOU FOR SHOPPING WITH US!';
+            response.redirect('./invoice.html');
         }
-        request.session.destroy(); //destroys session
-        response.send(invoice_str);
     });
 });
 
+app.post("/returnhome", function (request, response) {
+    response.redirect('./index.html');
+    request.session.destroy(); //destroys session
+    response.send(invoice_str);
+});
 
 app.use(express.static('./static')); // creates static server using express from the static folder
 app.listen(8080, () => console.log(`listening on port 8080`));

@@ -58,9 +58,6 @@
   <!-- Header with image -->
   <!--Assigns this section to HOME-->
   <header class="bgimg2 w3-display-container w3-grayscale-min" id="home">
-    <div class="w3-display-bottomleft w3-center w3-padding-large w3-hide-small">
-        <span class="w3-tag"><span style= "color:rgb(255, 101, 101)">Attention!:</span> Using the navigation bar (above) from this page will restart your order</span>
-      </div>
     <!--Diplays a title on the page-->
     <div class="w3-display-middle w3-center">
       <h5 class="w3-center w3-padding-64" style="font-size: 80px"><span class="w3-tag w3-wide">ACCOUNT LOGIN</span>
@@ -83,7 +80,7 @@
             <div>
                 <input type="text" name="username" size="40" placeholder="username" style="margin-bottom: 2%;margin-top: 5%;"><br />
                 <input type="password" name="password" size="40" placeholder="password" style="margin-bottom: 2%;"><br/>
-                <input type="submit" name="login" value="Login" id="submit"> </div>
+                <input class="w3-tag w3-wide custombutton" type="submit" name="login" value="Login" id="submit"> </div>
         </form>
     </body>
     
@@ -94,7 +91,7 @@
     <body>
     <div>
         <form>
-        <input type="button" value="Create Account" name="register" onclick="window.location='./registration.html'+document.location.search" style="margin-bottom: 5%;">
+        <input class="w3-tag w3-wide custombutton" type="button" value="Create Account" name="register" onclick="window.location='./registration.html'+document.location.search" style="margin-bottom: 5%;">
         </form>
     </div>
     
